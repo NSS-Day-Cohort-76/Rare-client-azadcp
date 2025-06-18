@@ -28,13 +28,3 @@ export const AllPostAdmin = () => {
     />
   );
 };
-
-// <div>
-//   <h2>Posts</h2>
-//   {posts?.map((post) => (
-//     <div key={post.id} className="post-card">
-//       <h3>{post.title}</h3>
-//       <p></p>
-//     </div>
-//   ))}
-// </div>
