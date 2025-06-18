@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GetAllPosts } from "../../managers/PostManager";
 import { PostTable } from "../shared/PostTable.js";
 
 export const AllPostAdmin = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     GetAllPosts().then((data) => {
@@ -19,22 +21,17 @@ export const AllPostAdmin = () => {
     setFilteredPosts(filtered);
   };
 
+  const handleRowClick = (postId) => {
+    navigate(`/posts/${postId}`);
+  };
+
   return (
     <PostTable
       posts={filteredPosts}
       onEdit={(id) => console.log("Edit", id)}
       onDelete={(id) => console.log("Delete", id)}
       onSearch={handleSearch}
+      onRowClick={handleRowClick} // <-- Pass click handler to PostTable
     />
   );
 };
-
-// <div>
-//   <h2>Posts</h2>
-//   {posts?.map((post) => (
-//     <div key={post.id} className="post-card">
-//       <h3>{post.title}</h3>
-//       <p></p>
-//     </div>
-//   ))}
-// </div>

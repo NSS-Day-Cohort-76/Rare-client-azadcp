@@ -1,6 +1,6 @@
 import { EditDeleteIconButtons } from "./EditDeleteIconButtons"
 
-export const PostTable = ({ posts, onEdit, onDelete, onSearch }) => {
+export const PostTable = ({ posts, onEdit, onDelete, onSearch, onRowClick }) => {
   return (
     <section className="section">
       <div className="container">
@@ -33,39 +33,46 @@ export const PostTable = ({ posts, onEdit, onDelete, onSearch }) => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(posts) && posts.map((post) => (
-              <tr key={post.id}>
-                <td>
-                  <div className="is-flex">
-                    <EditDeleteIconButtons
-                      iconSrc="/images/edit-icon.svg"
-                      altText="Edit"
-                      tooltipContent="Edit Post"
-                      onClick={() => onEdit(post.id)}
-                    />
-                    <EditDeleteIconButtons
-                      iconSrc="/images/delete-icon.svg"
-                      altText="Delete"
-                      tooltipContent="Delete Post"
-                      onClick={() => onDelete(post.id)}
-                    />
-                  </div>
-                </td>
-                <td>{post.title}</td>
-                <td>{post.username}</td>
-                <td>{post.publication_date}</td>
-                <td>{post.category}</td>
-                <td>{post.tags?.join(", ")}</td>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={post.approved === 1}
-                    disabled
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {Array.isArray(posts) &&
+    posts.map((post) => (
+      <tr
+        key={post.id}
+        onClick={() => onRowClick && onRowClick(post.id)}
+        style={{ cursor: "pointer" }}
+      >
+        <td>
+          <div className="is-flex">
+            <EditDeleteIconButtons
+              iconSrc="/images/edit-icon.svg"
+              altText="Edit"
+              tooltipContent="Edit Post"
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit(post.id);
+              }}
+            />
+            <EditDeleteIconButtons
+              iconSrc="/images/delete-icon.svg"
+              altText="Delete"
+              tooltipContent="Delete Post"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(post.id);
+              }}
+            />
+          </div>
+        </td>
+        <td>{post.title}</td>
+        <td>{post.username}</td>
+        <td>{post.publication_date}</td>
+        <td>{post.category}</td>
+        <td>{post.tags?.join(", ")}</td>
+        <td>
+          <input type="checkbox" checked={post.approved === 1} disabled />
+        </td>
+      </tr>
+    ))}
+</tbody>
         </table>
 
       </div>
