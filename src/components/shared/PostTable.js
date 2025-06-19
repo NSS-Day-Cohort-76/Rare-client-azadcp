@@ -52,7 +52,7 @@ export const PostTable = ({ posts, onEdit, onDelete, onSearch }) => {
                   </div>
                 </td>
                 <td>{post.title}</td>
-                <td>{post.username}</td>
+                <td>{post.author_name}</td>
                 <td>{post.publication_date}</td>
                 <td>{post.category}</td>
                 <td>{post.tags?.join(", ")}</td>
