@@ -13,58 +13,55 @@ export const NavBar = ({ token, setToken }) => {
     navbar.current.classList.toggle('is-active')
   }
 
+  const handleLogout = () => {
+    setToken('')
+    navigate('/login')
+  }
+
   return (
     <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
-          <img src={Logo} height="3rem" alt="Rare Logo" /> <h1 className="title is-4">Rare Publishing</h1>
-        </a>
+  <Link className="navbar-item" to="/">
+    <img src={Logo} height="3rem" alt="Rare Logo" />
+    <h1 className="title is-4">Rare Publishing</h1>
+  </Link>
 
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+  <button
+    className="navbar-burger"
+    aria-label="menu"
+    aria-expanded="false"
+    onClick={showMobileNavbar}
+    ref={hamburger}
+  >
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
 
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
-          {
-            token
-              ?
-              <Link to="/" className="navbar-item">Posts</Link>
-              :
-              ""
-          }
-        </div>
-
-        <div className="navbar-start">
-          {
-            token
-              ?
-              <Link to="/" className="navbar-item">User Manager</Link>
-              :
-              ""
-          }
+          {token && <Link to="/posts" className="navbar-item">All Posts</Link>}
+          {token && <Link to="/myposts" className="navbar-item">My Posts</Link>}
+          {token && <Link to="/categories" className="navbar-item">Category Manager</Link>}
+          {token && <Link to="/tags" className="navbar-item">Tag Manager</Link>}
+          {token && <Link to="/users" className="navbar-item">User Manager</Link>}
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {
-                token
-                  ?
-                  <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    navigate('/login')
-                  }}>Logout</button>
-                  :
-                  <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
-                  </>
-              }
+              {token ? (
+                <button className="button is-outlined" onClick={handleLogout}>
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link to="/register" className="button is-link">Register</Link>
+                  <Link to="/login" className="button is-outlined">Login</Link>
+                </>
+              )}
             </div>
           </div>
         </div>
