@@ -69,6 +69,7 @@ export const UserListAdmin = () => {
               )}
             />
           ))}
+
         </tbody>
       </table>
     </div>
