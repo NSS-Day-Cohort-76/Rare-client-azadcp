@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { GetAllUsers } from "../../managers/UserManager.js";
+
+import { useEffect, useState } from "react"
+import { GetAllUsers } from "../../managers/UserManager.js"
+import { User } from "./User.jsx"
 
 export const UserListAdmin = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
-    GetAllUsers().then((data) => {
-      setUsers(data);
-    });
-  }, []);
+    GetAllUsers().then(setUsers)
+  }, [])
 
   return (
     <div
@@ -39,41 +38,40 @@ export const UserListAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((userObj) => {
-            
-            return (
-            <tr key={userObj.id}>
-              <td>
-                <Link to={`/users/${userObj.id}`} className="btn btn-link">
-                  {userObj.username}
-                </Link>
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.active === 1}
-                  disabled
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.isAuthor === 1}
-                  disabled
-                />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.isAdmin === 1 }
-                  disabled
-                />
-              </td>
-            </tr>
-            
-          )})}
+          {users.map(user => (
+            <User
+              key={user.id}
+              user={user}
+              extraColumns={(user) => (
+                <>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={user.active === 1}
+                      disabled
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={user.isAuthor === 1 || user.isAdmin === 1}
+                      disabled
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={user.isAdmin === 1}
+                      disabled
+                    />
+                  </td>
+                </>
+              )}
+            />
+          ))}
+
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
