@@ -1,28 +1,18 @@
-import { useState, useEffect } from "react"
-import { EditDeleteIconButtons } from "./EditDeleteIconButtons"
-import { ConfirmDeleteModal } from "./ConfirmDeleteModal"
-import { getSinglePost } from "../../managers/PostManager.js"
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import { EditDeleteIconButtons } from "./EditDeleteIconButtons.jsx";
+import { ConfirmDeleteModal } from "./ConfirmDeleteModal.jsx";
 
-export const PostDetailsCard = ({ onEdit, onDelete }) => {
-  const [showModal, setShowModal] = useState(false)
-  const [post, setPost] = useState({});
-  const { postId } = useParams();
+export const PostDetailsCard = ({ post, onEdit, onDelete }) => {
+  const [showModal, setShowModal] = useState(false);
 
+  if (!post?.id) return <p>Loading...</p>;
 
-  useEffect(() => {
-      getSinglePost(postId).then(setPost);
-    }, [postId]);
-  
   return (
     <div className="box p-5">
-
       {/* Top: Title and Publish Date */}
       <div className="is-flex is-justify-content-space-between mb-4">
         <h1 className="title is-4">{post.title}</h1>
-        <p className="has-text-grey">
-          Publication Date: {post.publication_date}
-        </p>
+        <p className="has-text-grey">Publication Date: {post.publication_date}</p>
       </div>
 
       {/* Image */}
@@ -33,9 +23,9 @@ export const PostDetailsCard = ({ onEdit, onDelete }) => {
           style={{ maxWidth: "100%", borderRadius: "8px" }}
         />
       </div>
-<div className="content mb-5">
-          <p>{post.content}</p>
-        </div>
+      <div className="content mb-5">
+        <p>{post.content}</p>
+      </div>
       {/* Bottom: Author + Reactions + Actions */}
       <div className="is-flex is-justify-content-space-between is-align-items-center">
         <p className="has-text-grey-light">Author: {post.author_name}</p>
@@ -63,10 +53,10 @@ export const PostDetailsCard = ({ onEdit, onDelete }) => {
         show={showModal}
         onCancel={() => setShowModal(false)}
         onConfirm={() => {
-          setShowModal(false)
-          onDelete(post.id)
+          setShowModal(false);
+          onDelete(post.id);
         }}
       />
     </div>
-  )
-}
+  );
+};
