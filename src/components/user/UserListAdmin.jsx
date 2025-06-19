@@ -39,7 +39,9 @@ export const UserListAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((userObj) => (
+          {users.map((userObj) => {
+            
+            return (
             <tr key={userObj.id}>
               <td>
                 <Link to={`/users/${userObj.id}`} className="btn btn-link">
@@ -56,19 +58,20 @@ export const UserListAdmin = () => {
               <td>
                 <input
                   type="checkbox"
-                  checked={userObj.author === true || userObj.admin === true }
+                  checked={userObj.isAuthor === 1}
                   disabled
                 />
               </td>
               <td>
                 <input
                   type="checkbox"
-                  checked={userObj.admin === true }
+                  checked={userObj.isAdmin === 1 }
                   disabled
                 />
               </td>
             </tr>
-          ))}
+            
+          )})}
         </tbody>
       </table>
     </div>
