@@ -1,10 +1,19 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { EditDeleteIconButtons } from "./EditDeleteIconButtons"
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal"
+import { getSinglePost } from "../../managers/PostManager.js"
+import { useParams } from "react-router-dom"
 
-export const PostDetailsCard = ({ post, onEdit, onDelete }) => {
+export const PostDetailsCard = ({ onEdit, onDelete }) => {
   const [showModal, setShowModal] = useState(false)
+  const [post, setPost] = useState({});
+  const { postId } = useParams();
 
+
+  useEffect(() => {
+      getSinglePost(postId).then(setPost);
+    }, [postId]);
+  
   return (
     <div className="box p-5">
 
@@ -12,7 +21,7 @@ export const PostDetailsCard = ({ post, onEdit, onDelete }) => {
       <div className="is-flex is-justify-content-space-between mb-4">
         <h1 className="title is-4">{post.title}</h1>
         <p className="has-text-grey">
-          Published on: {post.publication_date}
+          Publication Date: {post.publication_date}
         </p>
       </div>
 
@@ -24,10 +33,12 @@ export const PostDetailsCard = ({ post, onEdit, onDelete }) => {
           style={{ maxWidth: "100%", borderRadius: "8px" }}
         />
       </div>
-
+<div className="content mb-5">
+          <p>{post.content}</p>
+        </div>
       {/* Bottom: Author + Reactions + Actions */}
       <div className="is-flex is-justify-content-space-between is-align-items-center">
-        <p className="has-text-grey-light">Author: {post.username}</p>
+        <p className="has-text-grey-light">Author: {post.author_name}</p>
 
         <div className="is-flex is-align-items-center">
           <span className="tag is-light mr-3">{post.reaction_count || 0} reactions</span>

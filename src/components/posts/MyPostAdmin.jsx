@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getSinglePost } from "../../managers/PostManager";
 import { EditDeleteIconButtons } from "../shared/EditDeleteIconButtons";
+import { PostDetailsCard } from "../shared/PostDetailsCard.js";
 
 export const MyPostAdmin = () => {
   const [post, setPost] = useState({});
@@ -14,7 +15,7 @@ export const MyPostAdmin = () => {
 
   return (
     <section className="section">
-      <div className="container box">
+      {/* <div className="container box">
         <div className="level">
           <h1 className="title level-left">{post.title}</h1>
           <p className="is-size-7 level-right">
@@ -50,10 +51,11 @@ export const MyPostAdmin = () => {
               altText="Delete Post"
               tooltipContent="Delete"
               onClick={() => console.log("Open confirmation modal")}
-            />
-          </div>
+            /> */}
+      {/* </div>
         </div>
-      </div>
+        </div> */}
+      <PostDetailsCard key={post.id} post={post} onEdit={(id) => console.log("edit", id)} />
     </section>
   );
 };
