@@ -6,11 +6,11 @@ import { AllPostAdmin } from "../components/posts/AllPostAdmin"
 import { UserListAdmin } from "../components/user/UserListAdmin"
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin"
 import { NavBar } from "../components/nav/NavBar"
-<<<<<<< HEAD
+
 import { CategoryManager } from "../components/category/CategoryManagerAdmin"
-=======
+
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
->>>>>>> develop
+
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
     
@@ -20,15 +20,15 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route element={<Authorized token={token} />}>
         <Route path="/posts" element={<AllPostAdmin token={token} />} />
         <Route path="/users" element={<UserListAdmin token={token} />}/>
-<<<<<<< HEAD
+
         <Route path="/categories" element={<CategoryManager token={token} />}/>
-=======
+
 
         <Route path="/tags" element={<TagManagerAdmin token={token} />} />
 
         <Route path="/users/:userId" element={<UserProfileAdmin />} />
 
->>>>>>> develop
+
       </Route>
     </Routes>
   </>

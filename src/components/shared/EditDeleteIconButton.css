@@ -2,3 +2,34 @@
   width: 20px;
   height: 20px;
 }
+
+.edit-delete-icon-buttons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.edit-delete-icon-buttons:hover {
+  background-color: #f0f0f0; /* gentle, light hover */
+  cursor: pointer;
+}
+
+.icon-button-image {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.tooltip-content {
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
