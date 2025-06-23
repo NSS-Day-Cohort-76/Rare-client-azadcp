@@ -8,11 +8,38 @@ import { SharedInput } from "../shared/SharedInput.jsx";
 export const AddPostAdmin = () => {
   return (
     <section className="section">
-      <div className="container">
-        <span>
-          <h1 className="">New Post</h1>
-        </span>
-        <SharedInput type={""} placeholder={"Title"} />
+      <div className="container is-flex-direction-column is-justify-content-left">
+        <div className="column is-half">
+          <span>
+            <h1 className="title is-4 mb-4">New Post</h1>
+          </span>
+          <SharedInput className="input is-normal mb-4 is-b" type={""} placeholder={"Title"} />
+          <SharedInput className="input is-normal" type={""} placeholder={"image URL"} />
+        </div>
+        <div className="field">
+          <div className="control column is-two-thirds">
+            <textarea class="textarea is-medium" placeholder="Article Content"></textarea>
+          </div>
+          <div class="select is-normal">
+            <select>
+              <option>Select dropdown</option>
+              <option>With options</option>
+            </select>
+          </div>
+          <div class="checkboxes">
+            <label class="checkbox">
+              <input type="checkbox" />
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" checked />
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" checked />
+            </label>
+          </div>
+        </div>
       </div>
     </section>
   );
