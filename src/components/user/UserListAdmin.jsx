@@ -17,9 +17,8 @@ export const UserListAdmin = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "60vh"
-      }}
-    >
+        minHeight: "60vh",
+      }}>
       <table
         className="table is-striped is-fullwidth"
         style={{
@@ -27,9 +26,8 @@ export const UserListAdmin = () => {
           border: "1px solid #ccc",
           borderRadius: "8px",
           boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-          background: "#fff"
-        }}
-      >
+          background: "#fff",
+        }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -47,25 +45,17 @@ export const UserListAdmin = () => {
                 </Link>
               </td>
               <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.active === 1}
-                  disabled
-                />
+                <input type="checkbox" checked={userObj.active === 1} disabled />
               </td>
               <td>
                 <input
                   type="checkbox"
-                  checked={userObj.author === true || userObj.admin === true }
+                  checked={userObj.author === true || userObj.admin === true}
                   disabled
                 />
               </td>
               <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.admin === true }
-                  disabled
-                />
+                <input type="checkbox" checked={userObj.admin === true} disabled />
               </td>
             </tr>
           ))}

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import "./EditDeleteIconButton.css"
-
+import "./EditDeleteIconButton.css";
 
 export const EditDeleteIconButtons = ({
   iconSrc,
