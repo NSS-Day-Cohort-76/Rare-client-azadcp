@@ -1,14 +1,13 @@
-
-import { useEffect, useState } from "react"
-import { GetAllUsers } from "../../managers/UserManager.js"
-import { User } from "./User.jsx"
+import { useEffect, useState } from "react";
+import { GetAllUsers } from "../../managers/UserManager.js";
+import { User } from "./User.jsx";
 
 export const UserListAdmin = () => {
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    GetAllUsers().then(setUsers)
-  }, [])
+    GetAllUsers().then(setUsers);
+  }, []);
 
   return (
     <div
@@ -36,41 +35,14 @@ export const UserListAdmin = () => {
           </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
-          {users.map((userObj) => (
-            <tr key={userObj.id}>
-              <td>
-                <Link to={`/users/${userObj.id}`} className="btn btn-link">
-                  {userObj.username}
-                </Link>
-              </td>
-              <td>
-                <input type="checkbox" checked={userObj.active === 1} disabled />
-              </td>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={userObj.author === true || userObj.admin === true}
-                  disabled
-                />
-              </td>
-              <td>
-                <input type="checkbox" checked={userObj.admin === true} disabled />
-              </td>
-            </tr>
-=======
-          {users.map(user => (
+          {users.map((user) => (
             <User
               key={user.id}
               user={user}
               extraColumns={(user) => (
                 <>
                   <td>
-                    <input
-                      type="checkbox"
-                      checked={user.active === 1}
-                      disabled
-                    />
+                    <input type="checkbox" checked={user.active === 1} disabled />
                   </td>
                   <td>
                     <input
@@ -80,25 +52,14 @@ export const UserListAdmin = () => {
                     />
                   </td>
                   <td>
-                    <input
-                      type="checkbox"
-                      checked={user.isAdmin === 1}
-                      disabled
-                    />
+                    <input type="checkbox" checked={user.isAdmin === 1} disabled />
                   </td>
                 </>
               )}
             />
->>>>>>> develop
           ))}
-
         </tbody>
       </table>
     </div>
-<<<<<<< HEAD
   );
 };
-=======
-  )
-}
->>>>>>> develop

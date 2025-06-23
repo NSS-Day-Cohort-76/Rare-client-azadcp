@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { GetOneUser } from "../../managers/UserManager.js";
@@ -27,34 +26,6 @@ export const UserProfileAdmin = () => {
   }/${createdDate.getDate()}/${createdDate.getFullYear()}`;
   const avatarUrl = user.profile_image_url || "/default-avatar.png"; // <-- here
   const profileType = user.isAdmin ? "Admin" : "Author";
-=======
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { GetOneUser } from "../../managers/UserManager.js"
-
-export const UserProfileAdmin = () => {
-  const { userId } = useParams()
-  const [user, setUser] = useState(null)
-
-//   useEffect(() => {
-//     GetOneUser(userId).then(setUser)
-//   }, [userId])
-
-useEffect(() => {
-  GetOneUser(userId).then(user => {
-    console.log("Fetched user:", user);
-    setUser(user);
-  });
-}, [userId]);
-
-  if (!user) return <p>Loading user profile...</p>
-
-  const fullName = `${user.first_name || ""} ${user.last_name || ""}`.trim()
-  const createdDate = new Date(user.created_on)
-  const formattedDate = `${createdDate.getMonth() + 1}/${createdDate.getDate()}/${createdDate.getFullYear()}`
-  const avatarUrl = user.profile_image_url || "/default-avatar.png"  // <-- here
-  const profileType = user.isAdmin ? "Admin" : "Author"
->>>>>>> develop
 
   return (
     <section className="section" style={{ maxWidth: "700px", margin: "auto" }}>
@@ -71,11 +42,7 @@ useEffect(() => {
               height: "180px",
               borderRadius: "50%",
               objectFit: "cover",
-<<<<<<< HEAD
               marginBottom: "1rem",
-=======
-              marginBottom: "1rem"
->>>>>>> develop
             }}
           />
           <p style={{ fontWeight: "bold", fontSize: "1.25rem" }}>{fullName || "N/A"}</p>
@@ -83,7 +50,6 @@ useEffect(() => {
 
         {/* Right side: stacked info */}
         <div style={{ flex: 1, fontSize: "1.1rem", lineHeight: "1.6" }}>
-<<<<<<< HEAD
           <p>
             <strong>Username:</strong> {user.username}
           </p>
@@ -101,14 +67,3 @@ useEffect(() => {
     </section>
   );
 };
-=======
-          <p><strong>Username:</strong> {user.username}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Creation Date:</strong> {formattedDate}</p>
-          <p><strong>Profile Type:</strong> {profileType}</p>
-        </div>
-      </div>
-    </section>
-  )
-}
->>>>>>> develop
