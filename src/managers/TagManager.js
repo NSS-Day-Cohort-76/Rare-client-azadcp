@@ -8,3 +8,17 @@ export const addTag = (newTag) => {
         body: JSON.stringify({label: newTag})
     })
 }
+
+export const UpdateTag = (tag) => {
+    return fetch(`http://localhost:8000/tags/${tag.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tag)
+    })
+}
+
+export const DeleteThisTag = (id) => {
+    return fetch(`http://localhost:8000/tags/${id}`, { method: "DELETE" })
+}
