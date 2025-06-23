@@ -1,53 +1,56 @@
 import { EditDeleteIconButtons } from "./EditDeleteIconButtons";
-
-export const CategoryTable = ({ onEdit, onDelete, rows, columns, onRowClick }) => {
+export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd }) => {
+  // Sort categories alphabetically by name
+  const sortedCategories = [...categories].sort((a, b) => a.label.localeCompare(b.label));
   return (
     <section className="section">
       <div className="container">
-        <table className="table is-hoverable table is-bordered">
+        {/* Top Row: Search + Add Category */}
+        <div className="is-flex is-justify-content-space-between mb-3">
+          <input
+            className="input is-small"
+            type="text"
+            placeholder="Search Categories"
+            onChange={(e) => onSearch?.(e.target.value)}
+            style={{ maxWidth: "300px" }}
+          />
+          <button className="button is-small is-primary" onClick={onAdd}>
+            <span className="icon">
+              <i className="fas fa-plus"></i>
+            </span>
+            <span>Add Category</span>
+          </button>
+        </div>
+        {/* Table */}
+        <table className="table is-fullwidth is-striped is-hoverable">
           <thead>
             <tr>
-              <th></th>
-              {columns.map((col) => (
-                <th key={col.key}>{col.label}</th>
-              ))}
+              <th></th> {/* Icon column */}
+              <th>Category Name</th>
             </tr>
           </thead>
-
           <tbody>
-            {Array.isArray(rows) &&
-              rows.map((row) => (
-                <tr
-                  key={row.id}
-                  onClick={() => onRowClick && onRowClick(row.id)}
-                  style={{ cursor: "pointer" }}>
-                  <td>
-                    <div className="is-flex">
-                      <EditDeleteIconButtons
-                        iconSrc="/images/edit-icon.svg"
-                        altText="Edit"
-                        tooltipContent="Edit Category"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onEdit(row.id);
-                        }}
-                      />
-                      <EditDeleteIconButtons
-                        iconSrc="/images/delete-icon.svg"
-                        altText="Delete"
-                        tooltipContent="Delete Category"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onDelete(row.id);
-                        }}
-                      />
-                    </div>
-                  </td>
-                  {columns.map((col) => (
-                    <td key={col.key}>{row[col.key]}</td>
-                  ))}
-                </tr>
-              ))}
+            {sortedCategories.map((category) => (
+              <tr key={category.id}>
+                <td>
+                  <div className="is-flex">
+                    <EditDeleteIconButtons
+                      iconSrc="/images/edit-icon.svg"
+                      altText="Edit"
+                      tooltipContent="Edit Category"
+                      onClick={() => onEdit(category.id)}
+                    />
+                    <EditDeleteIconButtons
+                      iconSrc="/images/delete-icon.svg"
+                      altText="Delete"
+                      tooltipContent="Delete Category"
+                      onClick={() => onDelete(category.id)}
+                    />
+                  </div>
+                </td>
+                <td>{category.label}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

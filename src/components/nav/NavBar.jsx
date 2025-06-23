@@ -2,11 +2,13 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
+// import { useParams } from "react-router-dom";
 
 export const NavBar = ({ token, setToken }) => {
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
+  // const postId = useParams(postId);
 
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
@@ -46,7 +48,7 @@ export const NavBar = ({ token, setToken }) => {
             </Link>
           )}
           {token && (
-            <Link to="/posts/:postId" className="navbar-item">
+            <Link to="/posts/postId" className="navbar-item">
               My Posts
             </Link>
           )}
