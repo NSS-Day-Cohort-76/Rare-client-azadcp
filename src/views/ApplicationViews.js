@@ -17,6 +17,11 @@ import { TagManagerAdmin } from "../components/tag/TagManagerAdmin";
 // import { NavBar } from "../components/nav/NavBar";
 // import { NavBar } from "../components/nav/NavBar";
 
+import { NavBar } from "../components/nav/NavBar";
+import { CategoryManager } from "../components/category/CategoryManagerAdmin";
+import { TagManagerAdmin } from "../components/tag/TagManagerAdmin";
+import { CreateCategory } from "../components/category/CreateCategory";
+
 export const ApplicationViews = ({ token, setToken }) => {
   return (
     <>
