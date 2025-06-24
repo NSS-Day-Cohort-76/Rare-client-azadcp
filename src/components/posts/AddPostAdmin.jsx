@@ -1,24 +1,24 @@
 import { SharedInput } from "../shared/SharedInput.jsx";
+import { getAllCategories } from "../../managers/CategoryManager.js";
+import { useState, useEffect } from "react";
 
 //* Add form for creating a new post
 //* DATE/TIME should be saved with new post
 //* current USER should be recorded as  (first_name + last_name -> AS AUTHOR_NAME
 //* Redirect to the NEW Post details page (must fix MyPostAdmin routing issue)
 
-const newPost = {
-  userId: user_id,
-  category: category_id,
-  title: "",
-  publication_date: new Date().toISOString(),
-  image_url: "",
-  content: "",
-  approved: true,
+// const localUser = localStorage.getItem("auth_token");
+// const userObj = JSON.parse(localUser);
 
-  // : tripName,
-  // userId: userObj.id,
-  // createdAt: new Date().toISOString(),
-  // parkId: parkId ? parseInt(parkId) : parseInt(selectedParkId),
-};
+// const newPost = {
+//   userId: userObj.id,
+//   category: category_id,
+//   title: "",
+//   publication_date: new Date().toISOString(),
+//   image_url: "",
+//   content: "",
+//   approved: true,
+// };
 
 export const AddPostAdmin = () => {
   return (
@@ -46,8 +46,11 @@ export const AddPostAdmin = () => {
           <div className="select is-normal mb-4">
             <select>
               <option>Category Select</option>
-              <option>With options</option>
-            </select>
+              {categories?.map((category) => (
+                <option options={categories} selectedValue={selectedCategoryId} onChange={(e) => setSelectedParkId(e.target.value)} key={category.id} value={category.id}></option>
+                >
+              ))}
+              </select>
           </div>
         </div>
       </div>
@@ -73,3 +76,7 @@ export const AddPostAdmin = () => {
 
 /* h1 New Post
   input component w/ Text Prop (Title Placeholder) */
+
+// {options?.map((option) => (
+//       <option key={option[valueKey]} value={option[valueKey]}>
+//         {option[labelKey]}
