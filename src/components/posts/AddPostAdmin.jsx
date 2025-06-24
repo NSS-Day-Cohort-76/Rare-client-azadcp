@@ -21,8 +21,46 @@ import { useState, useEffect } from "react";
 // };
 
 export const AddPostAdmin = () => {
+
+const [categories, setCategories] = useState([]);
+const [selectedCategoryId, setSelectedCategoryId] = useState("");
+const [title, setTitle] = useState("");
+const [imageUrl, setImageUrl] = useState("");
+const [content, setContent] = useState("");
+
+useEffect(() => {
+  getAllCategories().then(setCategories);
+}, []);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const newPost = {
+    userId: 1, // Replace with actual user ID from auth context or state
+    categoryId: selectedCategoryId,
+    title: title,
+    publication_date: new Date().toISOString(),
+    imageUrl: imageUrl,
+    content: content,
+    approved: true,
+  };
+
+  createPost(newPost)
+    .then(() => {
+      // Redirect to the new post details page
+      // navigate(`/posts/${newPost.id}`);
+      console.log("Post created successfully:", newPost);
+    })
+    .catch((error) => {
+      console.error("Error creating post:", error);
+    });
+};
+  console.log("New Post Data:", newPost);
+
+
+
   return (
     <section className="section">
+      <form onSubmit={handleSubmit}>
       <div className="container is-flex-direction-column is-justify-content-left">
         <div className="column is-half">
           <span>
@@ -31,7 +69,7 @@ export const AddPostAdmin = () => {
         </div>
         <div className="field column is-half">
           <div className="control">
-            <SharedInput className="input is-normal mb-4 is-b" type={""} placeholder={"Title"} />
+            <SharedInput className="input is-normal mb-4 is-b" type="text" placeholder="Title" value="{title}" />
             <SharedInput className="input is-normal" type={""} placeholder={"image URL"} />
           </div>
         </div>
@@ -70,6 +108,7 @@ export const AddPostAdmin = () => {
         </div>
       </div>
       {/* </div> */}
+      </form>
     </section>
   );
 };
