@@ -12,3 +12,8 @@ export const getSinglePost = (id) => {
           return post;
         });
     };
+
+export const GetPostsByUser = (userId) => {
+  return fetch(`http://localhost:8000/posts?userId=${userId}`)
+    .then((res) => res.json());
+};

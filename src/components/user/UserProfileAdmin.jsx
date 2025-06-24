@@ -1,20 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetOneUser } from "../../managers/UserManager.js";
+import { GetOneUser, GetPostCountByUser } from "../../managers/UserManager.js";
 
 export const UserProfileAdmin = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
-
-  //   useEffect(() => {
-  //     GetOneUser(userId).then(setUser)
-  //   }, [userId])
+  const [postCount, setPostCount] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    GetOneUser(userId).then((user) => {
-      console.log("Fetched user:", user);
-      setUser(user);
-    });
+    if (userId) {
+      GetOneUser(userId).then(setUser);
+      GetPostCountByUser(userId).then((data) => {
+        setPostCount(data.count);
+      });
+    }
   }, [userId]);
 
   if (!user) return <p>Loading user profile...</p>;
@@ -24,7 +24,7 @@ export const UserProfileAdmin = () => {
   const formattedDate = `${
     createdDate.getMonth() + 1
   }/${createdDate.getDate()}/${createdDate.getFullYear()}`;
-  const avatarUrl = user.profile_image_url || "/default-avatar.png"; // <-- here
+  const avatarUrl = user.profile_image_url || "/default-avatar.png";
   const profileType = user.isAdmin ? "Admin" : "Author";
 
   return (
@@ -45,7 +45,9 @@ export const UserProfileAdmin = () => {
               marginBottom: "1rem",
             }}
           />
-          <p style={{ fontWeight: "bold", fontSize: "1.25rem" }}>{fullName || "N/A"}</p>
+          <p style={{ fontWeight: "bold", fontSize: "1.25rem" }}>
+            {fullName || "N/A"}
+          </p>
         </div>
 
         {/* Right side: stacked info */}
@@ -62,6 +64,23 @@ export const UserProfileAdmin = () => {
           <p>
             <strong>Profile Type:</strong> {profileType}
           </p>
+
+          {/* ✅ Clickable article count link */}
+          {postCount !== null && (
+            <p
+              style={{
+                color: "blue",
+                textDecoration: "underline",
+                cursor: "pointer",
+                marginTop: "0.5rem",
+              }}
+              onClick={() => navigate(`/authorposts/${userId}`)}
+
+            >
+              This Author has written {postCount}{" "}
+              {postCount === 1 ? "article" : "articles"}
+            </p>
+          )}
         </div>
       </div>
     </section>
