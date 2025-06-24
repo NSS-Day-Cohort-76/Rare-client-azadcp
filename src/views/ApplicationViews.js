@@ -6,12 +6,16 @@ import { AllPostAdmin } from "../components/posts/AllPostAdmin";
 import { MyPostAdmin } from "../components/posts/MyPostAdmin";
 import { UserListAdmin } from "../components/user/UserListAdmin";
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin";
-import { NavBar } from "../components/nav/NavBar";
 import { AddPostAdmin } from "../components/posts/AddPostAdmin";
-
+import { Route, Routes } from "react-router-dom";
+import { Login } from "../components/auth/Login";
+import { Register } from "../components/auth/Register";
+import { Authorized } from "./Authorized";
+import { AuthorPosts } from "../components/user/AuthorPosts.jsx";
 import { CategoryManager } from "../components/category/CategoryManagerAdmin";
-
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin";
+// import { NavBar } from "../components/nav/NavBar";
+// import { NavBar } from "../components/nav/NavBar";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return (
@@ -27,6 +31,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/tags" element={<TagManagerAdmin token={token} />} />
           <Route path="/users/:userId" element={<UserProfileAdmin />} />
           <Route path="/posts/newpost" element={<AddPostAdmin />} />
+          <Route path="/authorposts/:userId" element={<AuthorPosts />} />
         </Route>
       </Routes>
     </>

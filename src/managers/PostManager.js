@@ -11,4 +11,6 @@ export const getSinglePost = (id) => {
     });
 };
 
-//* Create AddNewPost POST request
+export const GetPostsByUser = (userId) => {
+  return fetch(`http://localhost:8000/posts?userId=${userId}`).then((res) => res.json());
+};
