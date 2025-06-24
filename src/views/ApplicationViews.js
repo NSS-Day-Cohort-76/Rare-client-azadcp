@@ -7,10 +7,9 @@ import { MyPostAdmin } from "../components/posts/MyPostAdmin"
 import { UserListAdmin } from "../components/user/UserListAdmin"
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin"
 import { NavBar } from "../components/nav/NavBar"
-
 import { CategoryManager } from "../components/category/CategoryManagerAdmin"
-
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
+import { CreateCategory } from "../components/category/CreateCategory"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -22,6 +21,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/users" element={<UserListAdmin token={token} />} />
         <Route path="/posts/:postId" element={<MyPostAdmin  />} />
         <Route path="/categories" element={<CategoryManager token={token} />}/>
+        <Route path="/categories/edit" element={<CreateCategory token={token} />}/>
         <Route path="/tags" element={<TagManagerAdmin token={token} />} />
         <Route path="/users/:userId" element={<UserProfileAdmin />} />
       </Route>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export const CategoryForm = ({ onSave }) => {
+export const CreateCategory = ({ onSave }) => {
   const [category, setCategory] = useState("")
   const navigate = useNavigate()
 
