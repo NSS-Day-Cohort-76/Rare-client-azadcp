@@ -6,6 +6,8 @@ import { AllPostAdmin } from "../components/posts/AllPostAdmin"
 import { MyPostAdmin } from "../components/posts/MyPostAdmin"
 import { UserListAdmin } from "../components/user/UserListAdmin"
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin"
+import { AuthorPosts } from "../components/user/AuthorPosts.jsx";
+
 import { NavBar } from "../components/nav/NavBar"
 import { CategoryManager } from "../components/category/CategoryManagerAdmin"
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
@@ -24,6 +26,8 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/categories/add" element={<CreateCategory token={token}/>}/>
         <Route path="/tags" element={<TagManagerAdmin token={token} />} />
         <Route path="/users/:userId" element={<UserProfileAdmin />} />
+        <Route path="/authorposts/:userId" element={<AuthorPosts />} />
+
       </Route>
     </Routes>
   </>
