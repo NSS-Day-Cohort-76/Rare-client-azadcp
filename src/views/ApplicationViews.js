@@ -6,22 +6,12 @@ import { AllPostAdmin } from "../components/posts/AllPostAdmin";
 import { MyPostAdmin } from "../components/posts/MyPostAdmin";
 import { UserListAdmin } from "../components/user/UserListAdmin";
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin";
-import { AddPostAdmin } from "../components/posts/AddPostAdmin";
-import { Route, Routes } from "react-router-dom";
-import { Login } from "../components/auth/Login";
-import { Register } from "../components/auth/Register";
-import { Authorized } from "./Authorized";
 import { AuthorPosts } from "../components/user/AuthorPosts.jsx";
-import { CategoryManager } from "../components/category/CategoryManagerAdmin";
-import { TagManagerAdmin } from "../components/tag/TagManagerAdmin";
 // import { NavBar } from "../components/nav/NavBar";
-// import { NavBar } from "../components/nav/NavBar";
-
-import { NavBar } from "../components/nav/NavBar";
 import { CategoryManager } from "../components/category/CategoryManagerAdmin";
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin";
 import { CreateCategory } from "../components/category/CreateCategory";
-
+import { AddPostAdmin } from "../components/posts/AddPostAdmin.jsx";
 export const ApplicationViews = ({ token, setToken }) => {
   return (
     <>
@@ -33,9 +23,10 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/users" element={<UserListAdmin token={token} />} />
           <Route path="/posts/:postId" element={<MyPostAdmin />} />
           <Route path="/categories" element={<CategoryManager token={token} />} />
+          <Route path="/categories/add" element={<CreateCategory token={token} />} />
           <Route path="/tags" element={<TagManagerAdmin token={token} />} />
+          <Route path="/posts/newpost" element={<AddPostAdmin token={token} />} />
           <Route path="/users/:userId" element={<UserProfileAdmin />} />
-          <Route path="/posts/newpost" element={<AddPostAdmin />} />
           <Route path="/authorposts/:userId" element={<AuthorPosts />} />
         </Route>
       </Routes>
