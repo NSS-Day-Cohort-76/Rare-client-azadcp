@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { EditDeleteIconButtons } from "./EditDeleteIconButtons"
 
 export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd }) => {
@@ -5,6 +6,7 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
   const sortedCategories = [...categories].sort((a, b) =>
     a.label.localeCompare(b.label)
   )
+  const navigate = useNavigate()
 
   return (
     <section className="section">
@@ -21,7 +23,7 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
           />
           <button
             className="button is-small is-primary"
-            onClick={onAdd}
+            // onClick={navigate(`/categories/add`)}
           >
             <span className="icon"><i className="fas fa-plus"></i></span>
             <span>Add Category</span>

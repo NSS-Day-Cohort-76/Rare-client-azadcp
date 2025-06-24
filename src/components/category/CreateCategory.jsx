@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { addCategory } from "../../managers/CategoryManager"
 
-export const CreateCategory = ({ onSave }) => {
+export const CreateCategory = () => {
   const [category, setCategory] = useState("")
   const navigate = useNavigate()
 
@@ -12,7 +13,7 @@ export const CreateCategory = ({ onSave }) => {
       label: category.trim()
     }
 
-    onSave(newCategory)
+    addCategory(newCategory)
     navigate("/categories")
   }
 

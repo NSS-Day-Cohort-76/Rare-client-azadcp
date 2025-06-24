@@ -3,7 +3,7 @@ export const getAllCategories = () => {
     .then(res => res.json())
 }
 
-export const createCategory = (categoryData) => {
+export const addCategory = (categoryData) => {
   return fetch("http://localhost:8000/categories", {
     method: "POST",
     headers: {
