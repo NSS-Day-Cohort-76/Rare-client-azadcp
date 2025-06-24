@@ -7,7 +7,6 @@ import { MyPostAdmin } from "../components/posts/MyPostAdmin"
 import { UserListAdmin } from "../components/user/UserListAdmin"
 import { UserProfileAdmin } from "../components/user/UserProfileAdmin"
 import { AuthorPosts } from "../components/user/AuthorPosts.jsx";
-
 import { NavBar } from "../components/nav/NavBar"
 import { CategoryManager } from "../components/category/CategoryManagerAdmin"
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
