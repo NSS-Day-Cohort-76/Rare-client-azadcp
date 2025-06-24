@@ -14,7 +14,8 @@ export const CreateCategory = () => {
     }
 
     addCategory(newCategory)
-    navigate("/categories")
+    .then(() => {navigate("/categories", {replace: true})
+    })
   }
 
   return (

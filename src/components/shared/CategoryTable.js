@@ -23,7 +23,7 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
           />
           <button
             className="button is-small is-primary"
-            // onClick={navigate(`/categories/add`)}
+            onClick={() => navigate(`/categories/add`)}
           >
             <span className="icon"><i className="fas fa-plus"></i></span>
             <span>Add Category</span>
@@ -34,7 +34,7 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
         <table className="table is-fullwidth is-striped is-hoverable">
           <thead>
             <tr>
-              <th></th> {/* Icon column */}
+              <th></th>{/* Icon column */}
               <th>Category Name</th>
             </tr>
           </thead>
@@ -62,7 +62,6 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
             ))}
           </tbody>
         </table>
-
       </div>
     </section>
   )
