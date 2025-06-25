@@ -18,3 +18,9 @@ export const addCategory = (categoryData) => {
       return res.json()
     })
 }
+
+export const deleteCategory = (id) => {
+  return fetch(`http://localhost:8000/categories/${id}`, {
+    method: "DELETE"
+  })
+}
