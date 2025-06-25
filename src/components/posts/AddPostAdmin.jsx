@@ -3,6 +3,7 @@ import { getAllCategories } from "../../managers/CategoryManager.js";
 import { useState, useEffect } from "react";
 import { CreateNewPost } from "../../managers/PostManager.js";
 import { useNavigate } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 const userId = localStorage.getItem("auth_token");
 // let userObj = JSON.parse(localUser);
@@ -27,12 +28,13 @@ const userId = localStorage.getItem("auth_token");
 //   console.log("Parsed user object:", userObj);
 // }
 
-export const AddPostAdmin = ({ postId, onSuccess }) => {
+export const AddPostAdmin = ({ postId, onSuccess, id }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
+  // const { postId } = useParams;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,13 +49,13 @@ export const AddPostAdmin = ({ postId, onSuccess }) => {
       user_id: parseInt(userId, 10),
       category_id: selectedCategoryId,
       title: title,
-      publication_date: new Date().toISOString(),
+      publication_date: new Date().toISOString().slice(0, 10),
       image_url: imageUrl,
       content: content,
       approved: true,
     };
 
-    CreateNewPost(newPost).then(() => {
+    CreateNewPost(newPost).then((createdPost) => {
       setTitle("");
       setImageUrl("");
       setSelectedCategoryId("");
@@ -62,7 +64,7 @@ export const AddPostAdmin = ({ postId, onSuccess }) => {
         onSuccess();
       }
 
-      navigate(`/posts/${postId}`);
+      navigate(`/posts/${createdPost.id}`);
     });
     // .catch((error) => {
     //   console.error("Error on the AddPostAdmin module:", error);

@@ -21,7 +21,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route element={<Authorized token={token} />}>
           <Route path="/posts" element={<AllPostAdmin token={token} />} />
           <Route path="/users" element={<UserListAdmin token={token} />} />
-          <Route path="/posts/:postId" element={<MyPostAdmin />} />
+          <Route path="/posts/:postId" element={<MyPostAdmin token={token} />} />
           <Route path="/categories" element={<CategoryManager token={token} />} />
           <Route path="/categories/add" element={<CreateCategory token={token} />} />
           <Route path="/tags" element={<TagManagerAdmin token={token} />} />
