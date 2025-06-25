@@ -4,8 +4,28 @@ import { useState, useEffect } from "react";
 import { CreateNewPost } from "../../managers/PostManager.js";
 import { useNavigate } from "react-router-dom";
 
-const localUser = localStorage.getItem("auth_token");
-const userObj = JSON.parse(localUser);
+const userId = localStorage.getItem("auth_token");
+// let userObj = JSON.parse(localUser);
+
+// if (localUser) {
+//   // Check if localUser is not null or empty
+//   try {
+//     userObj = JSON.parse(localUser);
+//   } catch (e) {
+//     console.error("Failed to parse localUser JSON:", e);
+//     // Handle the error, e.g., clear localStorage or redirect to login
+//     localStorage.removeItem("auth_token");
+//   }
+// } else {
+//   // Handle the case where localUser is not found in localStorage
+//   console.warn("rare_user not found in localStorage.");
+//   // For example, redirect to a login page
+// }
+
+// // Now you can safely use userObj if it's not null
+// if (userObj) {
+//   console.log("Parsed user object:", userObj);
+// }
 
 export const AddPostAdmin = ({ postId, onSuccess }) => {
   const [categories, setCategories] = useState([]);
@@ -23,34 +43,31 @@ export const AddPostAdmin = ({ postId, onSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const newPost = {
-      user_id: userObj.id,
+      user_id: parseInt(userId, 10),
       category_id: selectedCategoryId,
       title: title,
       publication_date: new Date().toISOString(),
-      imageUrl: imageUrl,
+      image_url: imageUrl,
       content: content,
       approved: true,
     };
 
-    CreateNewPost(newPost)
-      .then(() => {
-        setTitle("");
-        setImageUrl("");
-        setSelectedCategoryId("");
-        setContent("");
-        if (onSuccess) {
-          onSuccess();
-        }
-        // Optionally, you can redirect to the new post's detail page after creation
+    CreateNewPost(newPost).then(() => {
+      setTitle("");
+      setImageUrl("");
+      setSelectedCategoryId("");
+      setContent("");
+      if (onSuccess) {
+        onSuccess();
+      }
 
-        navigate(`/posts/${newPost.id}`);
-      })
-      .catch((error) => {
-        console.error("Error creating post:", error);
-        // Handle error (e.g., show a notification)
-      });
+      navigate(`/posts/${postId}`);
+    });
+    // .catch((error) => {
+    //   console.error("Error on the AddPostAdmin module:", error);
+    // //   // Handle error (e.g., show a notification)
+    // });
   };
 
   return (
@@ -95,7 +112,7 @@ export const AddPostAdmin = ({ postId, onSuccess }) => {
             <div className="select is-normal mb-4">
               <select
                 value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}>
+                onChange={(e) => setSelectedCategoryId(parseInt(e.target.value, 10))}>
                 <option value="">Category Select</option> {/* Placeholder */}
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>

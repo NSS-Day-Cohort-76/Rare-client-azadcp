@@ -24,7 +24,7 @@ export const CreateNewPost = (postData) => {
     body: JSON.stringify(postData),
   }).then((res) => {
     if (!res.ok) {
-      throw new Error("Failed to create post");
+      throw new Error("Failing at post request");
     }
     return res.json();
   });
