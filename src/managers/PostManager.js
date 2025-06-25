@@ -17,3 +17,8 @@ export const GetPostsByUser = (userId) => {
   return fetch(`http://localhost:8000/posts?userId=${userId}`)
     .then((res) => res.json());
 };
+
+export const PostTag = () => {
+  return fetch("http://localhost:8000/postTags?_expand=post&_expand=tag").then(res => res.json());
+};
+
