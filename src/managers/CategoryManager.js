@@ -24,3 +24,23 @@ export const deleteCategory = (id) => {
     method: "DELETE"
   })
 }
+
+export const updateCategory = (id, categoryData) => {
+  return fetch(`http://localhost:8000/categories/${id}`, {
+    method: "PUT", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(categoryData),
+  })
+}
+
+export const getCategoryById = (id) => {
+  return fetch(`http://localhost:8000/categories/${id}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch category")
+      }
+      return res.json()
+    })
+}

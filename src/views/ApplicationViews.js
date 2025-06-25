@@ -11,6 +11,7 @@ import { NavBar } from "../components/nav/NavBar"
 import { CategoryManager } from "../components/category/CategoryManagerAdmin"
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
 import { CreateCategory } from "../components/category/CreateCategory"
+import { EditCategoryForm } from "../components/category/EditCategory.jsx"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -23,10 +24,10 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/posts/:postId" element={<MyPostAdmin  />} />
         <Route path="/categories" element={<CategoryManager token={token} />}/>
         <Route path="/categories/add" element={<CreateCategory token={token}/>}/>
+        <Route path="/categories/edit/:categoryId" element={<EditCategoryForm token={token}/>}/>
         <Route path="/tags" element={<TagManagerAdmin token={token} />} />
         <Route path="/users/:userId" element={<UserProfileAdmin />} />
         <Route path="/authorposts/:userId" element={<AuthorPosts />} />
-
       </Route>
     </Routes>
   </>
