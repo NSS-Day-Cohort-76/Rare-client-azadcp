@@ -23,7 +23,7 @@ export const CategoryManager = () => {
       categories={categories}
       onAdd={() => navigate("/categories/new")}
       onDelete={handleDelete}
-      // onEdit={}
+      onEdit={(id) => navigate(`/categories/edit/${id}`)}
       // onSearch={}
     />
   );
