@@ -78,7 +78,7 @@ export const UserProfileAdmin = () => {
 
             >
               This Author has written {postCount}{" "}
-              {postCount === 1 ? "article" : "articles"}
+              {postCount === 1 ? "post" : "posts"}
             </p>
           )}
         </div>
