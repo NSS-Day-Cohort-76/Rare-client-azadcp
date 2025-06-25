@@ -12,29 +12,31 @@ export const AllPostAdmin = () => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [selectedPostId, setSelectedPostId] = useState(null); //
   const [showModal, setShowModal] = useState(false); //
-  const [tags, setTags] = useState([])
-  const [postTags, setPostTags] = useState([])
+  const [tags, setTags] = useState([]);
+  const [postTags, setPostTags] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-  Promise.all([GetAllPosts(), GetAllTags(), PostTag()]).then(
-    ([postsData, tagsData, postTagsData]) => {
-      // Attach tags to each post
-      const postsWithTags = postsData.map(post => {
-        const tagIds = postTagsData
-          .filter(pt => pt.post_id === post.id)
-          .map(pt => pt.tag_id);
-        const postTagsArr = tagsData.filter(tag => tagIds.includes(tag.id));
-        return { ...post, tags: postTagsArr };
-      });
-      setPosts(postsWithTags);
-      setFilteredPosts(postsWithTags);
-      setTags(tagsData);
-      setPostTags(postTagsData);
-    }
-  );
-}, []);
+    Promise.all([GetAllPosts(), GetAllTags(), PostTag()]).then(
+      ([postsData, tagsData, postTagsData]) => {
+        // Attach tags to each post
+        const postsWithTags = postsData.map((post) => {
+          const tagIds = postTagsData.filter((pt) => pt.post_id === post.id).map((pt) => pt.tag_id);
+          const postTagsArr = tagsData.filter((tag) => tagIds.includes(tag.id));
+          return { ...post, tags: postTagsArr };
+        });
+        setPosts(postsWithTags);
+        setFilteredPosts(postsWithTags);
+        setTags(tagsData);
+        setPostTags(postTagsData);
+      }
+    );
+  }, []);
+
+  const handleAddPostClick = () => {
+    navigate(`/posts/newpost`);
+  };
 
   const handleRowClick = (postId) => {
     navigate(`/posts/${postId}`);
@@ -60,15 +62,15 @@ export const AllPostAdmin = () => {
     setShowModal(false);
   };
 
- const handleSearch = (e) => {
-  const text = e.target.value.toLowerCase();
-  const filtered = posts.filter((post) => {
-    const inTitle = post.title.toLowerCase().includes(text);
-    const inTags = post.tags && post.tags.some(tag => tag.label.toLowerCase().includes(text));
-    return inTitle || inTags;
-  });
-  setFilteredPosts(filtered);
-};
+  const handleSearch = (e) => {
+    const text = e.target.value.toLowerCase();
+    const filtered = posts.filter((post) => {
+      const inTitle = post.title.toLowerCase().includes(text);
+      const inTags = post.tags && post.tags.some((tag) => tag.label.toLowerCase().includes(text));
+      return inTitle || inTags;
+    });
+    setFilteredPosts(filtered);
+  };
   return (
     <section className="section">
       <div className="container">
@@ -80,7 +82,7 @@ export const AllPostAdmin = () => {
             onChange={handleSearch}
             style={{ maxWidth: "300px" }}
           />
-          <SharedPostButton className="button is-small is-primary">
+          <SharedPostButton onClick={handleAddPostClick} className="button is-small is-primary">
             Add Post &nbsp;✚
           </SharedPostButton>{" "}
         </div>

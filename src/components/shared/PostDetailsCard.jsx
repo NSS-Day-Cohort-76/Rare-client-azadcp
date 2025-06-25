@@ -19,7 +19,9 @@ export const PostDetailsCard = ({ post, onEdit, onDelete }) => {
     <div className="box p-5">
       <div className="is-flex is-justify-content-space-between mb-4">
         <h1 className="title is-4">{post.title}</h1>
-        <p className="has-text-grey">Publication Date: {post.publication_date}</p>
+        <p className="has-text-grey">
+          Publication Date: {post.publication_date ? post.publication_date.slice(0, 10) : ""}
+        </p>
       </div>
 
       {/* Image */}
