@@ -39,3 +39,8 @@ export const UpdatePost = (post) => {
     body: JSON.stringify(post),
   });
 };
+
+export const PostTag = () => {
+  return fetch("http://localhost:8000/postTags?_expand=post&_expand=tag").then(res => res.json());
+};
+

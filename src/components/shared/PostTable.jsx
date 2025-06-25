@@ -46,6 +46,8 @@ export const PostTable = ({ rows, columns, onEdit, onDelete, onRowClick }) => {
                   <td key={col.key}>
                     {col.key === "approved" ? (
                       <input type="checkbox" checked={row[col.key] === 1} disabled />
+                    ) : col.key === "tags" && Array.isArray(row.tags) ? (
+                      row.tags.map(tag => tag.label).join(", ")
                     ) : Array.isArray(row[col.key]) ? (
                       row[col.key].join(", ")
                     ) : (
