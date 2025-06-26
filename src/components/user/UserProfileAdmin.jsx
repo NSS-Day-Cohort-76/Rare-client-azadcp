@@ -94,8 +94,8 @@ const handleUnsubscribe = () => {
             src={avatarUrl}
             alt={`${user.username}'s avatar`}
             style={{
-              width: "180px",
-              height: "180px",
+              width: "200px",
+              height: "200px",
               borderRadius: "50%",
               objectFit: "cover",
               marginBottom: "1rem",
