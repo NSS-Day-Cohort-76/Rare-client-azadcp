@@ -6,6 +6,7 @@ import {
   checkSubscription,
   createSubscription,
   endSubscription,
+  getSubscriberCount, 
 } from "../../managers/UserManager.js";
 
 export const UserProfileAdmin = ({ token, currentUserId }) => {
@@ -13,6 +14,7 @@ export const UserProfileAdmin = ({ token, currentUserId }) => {
   const [user, setUser] = useState(null);
   const [postCount, setPostCount] = useState(null);
   const [subscription, setSubscription] = useState(null);
+  const [subscriberCount, setSubscriberCount] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,22 +26,37 @@ export const UserProfileAdmin = ({ token, currentUserId }) => {
     }
   }, [userId]);
 
-useEffect(() => {
-  if (currentUserId && userId) {
-    console.log("🔍 Checking subscription: follower =", currentUserId, "author =", userId);
+  useEffect(() => {
+    if (currentUserId && userId) {
 
-    checkSubscription(currentUserId, userId).then((res) => {
-      console.log("🔁 Subscription check result:", res);
+      checkSubscription(currentUserId, userId).then((res) => {
 
-      if (res && res.id) {
-        setSubscription(res);
-      } else {
-        setSubscription(null);
-      }
-    });
-  }
-}, [currentUserId, userId]);
+        if (res && res.id) {
+          setSubscription(res);
+        } else {
+          setSubscription(null);
+        }
+      });
+    }
+  }, [currentUserId, userId]);
 
+  //  subscriber count if currentUser is viewing their own profile (author)
+  useEffect(() => {
+    if (parseInt(currentUserId) === parseInt(userId)) {
+      getSubscriberCount(userId, token)
+        .then((data) => {
+          if (data && typeof data.count === "number") {
+            setSubscriberCount(data.count);
+          } else {
+            setSubscriberCount(0);
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to fetch subscriber count:", error);
+          setSubscriberCount(0);
+        });
+    }
+  }, [currentUserId, userId, token]);
 
   if (!user) return <p>Loading user profile...</p>;
 
@@ -51,38 +68,36 @@ useEffect(() => {
   const avatarUrl = user.profile_image_url || "/default-avatar.png";
   const profileType = user.isAdmin ? "Admin" : "Author";
 
-const handleSubscribe = () => {
-  console.log("Subscribing follower:", currentUserId, "to author:", userId);
-  createSubscription(currentUserId, userId)
-    .then((newSub) => {
-      if (newSub && newSub.id) {
-        setSubscription(newSub);
-      } else {
-        setSubscription(null);
-        console.warn("Failed to subscribe: invalid response", newSub);
-      }
-    })
-    .catch((error) => {
-      console.error("Subscription request failed:", error);
-    });
-};
-
-const handleUnsubscribe = () => {
-  if (subscription && subscription.id) {
-    endSubscription(subscription.id)
-      .then(() => {
-        console.log("✅ Unsubscribed successfully");
-        setSubscription(null); // immediately update state
+  const handleSubscribe = () => {
+    console.log("Subscribing follower:", currentUserId, "to author:", userId);
+    createSubscription(currentUserId, userId)
+      .then((newSub) => {
+        if (newSub && newSub.id) {
+          setSubscription(newSub);
+        } else {
+          setSubscription(null);
+          console.warn("Failed to subscribe: invalid response", newSub);
+        }
       })
       .catch((error) => {
-        console.error("❌ Failed to unsubscribe:", error);
+        console.error("Subscription request failed:", error);
       });
-  } else {
-    console.warn("⚠️ No valid subscription to unsubscribe from.");
-  }
-};
+  };
 
-
+  const handleUnsubscribe = () => {
+    if (subscription && subscription.id) {
+      endSubscription(subscription.id)
+        .then(() => {
+          console.log("✅ Unsubscribed successfully");
+          setSubscription(null); 
+        })
+        .catch((error) => {
+          console.error("❌ Failed to unsubscribe:", error);
+        });
+    } else {
+      console.warn("No subscription to unsubscribe from.");
+    }
+  };
 
   return (
     <section className="section" style={{ maxWidth: "700px", margin: "auto" }}>
@@ -130,23 +145,34 @@ const handleUnsubscribe = () => {
               }}
               onClick={() => navigate(`/authorposts/${userId}`)}
             >
-              This Author has written {postCount}{" "}
-              {postCount === 1 ? "post" : "posts"}
+              This Author has written {postCount} {postCount === 1 ? "post" : "posts"}
             </p>
           )}
 
-      {parseInt(currentUserId) !== parseInt(userId) && (
-  subscription ? (
-    <button className="button is-danger" onClick={handleUnsubscribe}>
-      Unsubscribe
-    </button>
-  ) : (
-    <button className="button is-primary" onClick={handleSubscribe}>
-      Subscribe
-    </button>
-  )
-)}
+          {/* NEW: Show subscriber count only if viewing own profile */}
+          {parseInt(currentUserId) === parseInt(userId) && subscriberCount !== null && (
+            <p
+              style={{
+                color: "green",
+                fontWeight: "bold",
+                marginTop: "0.5rem",
+              }}
+            >
+              You have {subscriberCount} {subscriberCount === 1 ? "subscriber" : "subscribers"}
+            </p>
+          )}
 
+          {parseInt(currentUserId) !== parseInt(userId) && (
+            subscription ? (
+              <button className="button is-danger" onClick={handleUnsubscribe}>
+                Unsubscribe
+              </button>
+            ) : (
+              <button className="button is-primary" onClick={handleSubscribe}>
+                Subscribe
+              </button>
+            )
+          )}
         </div>
       </div>
     </section>
