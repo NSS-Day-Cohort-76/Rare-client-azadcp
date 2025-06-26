@@ -13,22 +13,24 @@ import { CategoryManager } from "../components/category/CategoryManagerAdmin"
 import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
 import { CreateCategory } from "../components/category/CreateCategory"
 
-export const ApplicationViews = ({ token, setToken }) => {
-  return <>
-    <Routes>
-      <Route path="/login" element={<Login setToken={setToken} />}  />
-      <Route path="/register" element={<Register setToken={setToken} />}  />
-      <Route element={<Authorized token={token} />}>
-        <Route path="/posts" element={<AllPostAdmin token={token} />} />
-        <Route path="/users" element={<UserListAdmin token={token} />} />
-        <Route path="/posts/:postId" element={<MyPostAdmin  />} />
-        <Route path="/categories" element={<CategoryManager token={token} />}/>
-        <Route path="/categories/add" element={<CreateCategory token={token}/>}/>
-        <Route path="/tags" element={<TagManagerAdmin token={token} />} />
-        <Route path="/users/:userId" element={<UserProfileAdmin />} />
-        <Route path="/authorposts/:userId" element={<AuthorPosts />} />
-
-      </Route>
-    </Routes>
-  </>
+export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUserId }) => {
+  console.log("ApplicationViews currentUserId:", currentUserId);
+  return (
+    <>
+      <Routes>
+        <Route path="/login" element={<Login setToken={setToken} setCurrentUserId={setCurrentUserId} />} />
+        <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route element={<Authorized token={token} />}>
+          <Route path="/posts" element={<AllPostAdmin token={token} />} />
+          <Route path="/users" element={<UserListAdmin token={token} />} />
+          <Route path="/posts/:postId" element={<MyPostAdmin />} />
+          <Route path="/categories" element={<CategoryManager token={token} />} />
+          <Route path="/categories/add" element={<CreateCategory token={token} />} />
+          <Route path="/tags" element={<TagManagerAdmin token={token} />} />
+          <Route path="/users/:userId" element={<UserProfileAdmin token={token} currentUserId={currentUserId} />} />
+          <Route path="/authorposts/:userId" element={<AuthorPosts />} />
+        </Route>
+      </Routes>
+    </>
+  )
 }
