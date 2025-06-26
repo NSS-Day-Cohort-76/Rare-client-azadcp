@@ -44,7 +44,7 @@ export const PostDetailAdmin = () => {
   };
 
   return (
-    <section className="section">
+    <section className="section pt-0 mt-0">
       {post.id ? (
         <>
           <PostDetailLayout
