@@ -13,6 +13,7 @@ import { TagManagerAdmin } from "../components/tag/TagManagerAdmin"
 import { CreateCategory } from "../components/category/CreateCategory"
 import { EditCategoryForm } from "../components/category/EditCategory.jsx"
 import { AddPostAdmin } from "../components/posts/AddPostAdmin.jsx";
+import { CommentViewAdmin } from "../components/comments/CommentViewAdmin.jsx";
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -30,6 +31,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/posts/newpost" element={<AddPostAdmin token={token} />} />
         <Route path="/users/:userId" element={<UserProfileAdmin />} />
         <Route path="/authorposts/:userId" element={<AuthorPosts />} />
+        <Route path="/comments/:postId" element={<CommentViewAdmin token={token}/>} />
       </Route>
     </Routes>
   </>
