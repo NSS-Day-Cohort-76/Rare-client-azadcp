@@ -5,7 +5,7 @@ import { GetOneUser } from "../../managers/UserManager.js";
 import { PostDetailsCard } from "../shared/PostDetailsCard.jsx";
 
 export const AuthorPosts = () => {
-  const { userId } = useParams(); // gets :userId from the URL
+  const { userId } = useParams(); 
   const [userPosts, setUserPosts] = useState([]);
   const [user, setUser] = useState(null);
 

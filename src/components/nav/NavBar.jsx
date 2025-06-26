@@ -2,23 +2,26 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
-// import { useParams } from "react-router-dom";
 
-export const NavBar = ({ token, setToken }) => {
+
+export const NavBar = ({ token, setToken, setCurrentUserId }) => {
+
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
-  // const postId = useParams(postId);
+
 
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
     navbar.current.classList.toggle("is-active");
   };
 
-  const handleLogout = () => {
-    setToken("");
-    navigate("/login");
-  };
+ const handleLogout = () => {
+  localStorage.removeItem("rare_token");
+  setToken("");
+  setCurrentUserId(null);
+  navigate("/login");
+};
 
   return (
     <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
