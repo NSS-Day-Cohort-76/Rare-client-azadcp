@@ -53,7 +53,11 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
                       iconSrc="/images/delete-icon.svg"
                       altText="Delete"
                       tooltipContent="Delete Category"
-                      onClick={() => onDelete(category.id)}
+                      onClick={ () => { 
+                        if (window.confirm("Are you sure you want to delete this category?")) { 
+                          onDelete(category.id) 
+                        }
+                      }}
                     />
                   </div>
                 </td>
