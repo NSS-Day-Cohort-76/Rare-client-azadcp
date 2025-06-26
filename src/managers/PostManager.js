@@ -1,19 +1,19 @@
 export const GetAllPosts = () => {
   return fetch("http://localhost:8000/posts").then((res) => res.json());
 };
-
+//------------------------------------------------------------
 export const getSinglePost = (id) => {
   return fetch(`http://localhost:8000/posts/${id}`)
-    .then(response => response.json())
-    .then(post => {
-         
-          return post;
-        });
-    };
+    .then((response) => response.json())
+    .then((post) => {
+      return post;
+    });
+};
 
 export const GetPostsByUser = (userId) => {
   return fetch(`http://localhost:8000/posts?userId=${userId}`).then((res) => res.json());
 };
+//------------------------------------------------------------
 
 export const CreateNewPost = (postData) => {
   return fetch("http://localhost:8000/posts", {
@@ -29,6 +29,20 @@ export const CreateNewPost = (postData) => {
     return res.json();
   });
 };
+//------------------------------------------------------------
+
+export const deletePost = (id) => {
+  return fetch(`http://localhost:8000/posts/${id}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to delete post.");
+    }
+    return response;
+  });
+};
+
+//------------------------------------------------------------
 
 export const UpdatePost = (post) => {
   return fetch(`http://localhost:8000/posts/${post.id}`, {
@@ -39,8 +53,8 @@ export const UpdatePost = (post) => {
     body: JSON.stringify(post),
   });
 };
+//------------------------------------------------------------
 
 export const PostTag = () => {
-  return fetch("http://localhost:8000/postTags?_expand=post&_expand=tag").then(res => res.json());
+  return fetch("http://localhost:8000/postTags?_expand=post&_expand=tag").then((res) => res.json());
 };
-
