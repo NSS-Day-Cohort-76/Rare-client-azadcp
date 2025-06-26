@@ -51,3 +51,25 @@ export const endSubscription = (subscriptionId) => {
     return;
   });
 }
+export const getSubscriberCount = async (authorId) => {
+  try {
+    const response = await fetch(`http://localhost:8000/subscriptions?authorId=${authorId}`, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch subscriber count: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+
+
+    return { count: typeof data.subscriber_count === "number" ? data.subscriber_count : 0 };
+  } catch (error) {
+    console.error("Error in getSubscriberCount:", error);
+    return { count: 0 };
+  }
+};
