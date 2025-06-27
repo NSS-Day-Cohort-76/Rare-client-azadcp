@@ -1,12 +1,12 @@
 import { EditDeleteIconButtons } from "../shared/EditDeleteIconButtons"
 
-export const TagTable = ({ tags, onEdit, onDelete }) => (
+export const TagTable = ({ tags, onEdit, onDelete, children }) => (
   <section className="section">
     <div className="container">
       <table className="table is-fullwidth is-striped is-hoverable">
         <thead>
           <tr>
-            <th></th> {/* Icon column */}
+            <th> {children} </th> {/* Icon column */}
             <th>Name</th>
           </tr>
         </thead>
