@@ -3,25 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import Logo from "./rare.jpeg";
 
-
 export const NavBar = ({ token, setToken, setCurrentUserId }) => {
-
   const navigate = useNavigate();
   const navbar = useRef();
   const hamburger = useRef();
 
+  const userId = localStorage.getItem("rare_userId");
 
   const showMobileNavbar = () => {
     hamburger.current.classList.toggle("is-active");
     navbar.current.classList.toggle("is-active");
   };
 
- const handleLogout = () => {
-  localStorage.removeItem("rare_token");
-  setToken("");
-  setCurrentUserId(null);
-  navigate("/login");
-};
+  const handleLogout = () => {
+    localStorage.removeItem("rare_token");
+    setToken("");
+    setCurrentUserId(null);
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
@@ -42,7 +41,6 @@ export const NavBar = ({ token, setToken, setCurrentUserId }) => {
           <span aria-hidden="true"></span>
         </button>
       </div>
-
       <div className="navbar-menu" ref={navbar}>
         <div className="navbar-start">
           {token && (
@@ -50,8 +48,8 @@ export const NavBar = ({ token, setToken, setCurrentUserId }) => {
               All Posts
             </Link>
           )}
-          {token && (
-            <Link to="/posts/postId" className="navbar-item">
+          {token && userId && (
+            <Link to={`/authorposts/${userId}`} className="navbar-item">
               My Posts
             </Link>
           )}

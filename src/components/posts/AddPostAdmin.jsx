@@ -3,6 +3,7 @@ import { getAllCategories } from "../../managers/CategoryManager.js";
 import { useState, useEffect } from "react";
 import { CreateNewPost } from "../../managers/PostManager.js";
 import { useNavigate } from "react-router-dom";
+import { GetAllTags } from "../../managers/TagManager.js";
 // import { useParams } from "react-router-dom";
 
 const userId = localStorage.getItem("auth_token");
@@ -34,6 +35,8 @@ export const AddPostAdmin = ({ postId, onSuccess, id }) => {
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [content, setContent] = useState("");
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState("");
   // const { postId } = useParams;
   const navigate = useNavigate();
 
@@ -42,6 +45,16 @@ export const AddPostAdmin = ({ postId, onSuccess, id }) => {
       getAllCategories().then(setCategories);
     }
   }, [postId]);
+
+  useEffect(() => {
+    GetAllTags().then(setTags);
+  }, []);
+
+  const handleCheckboxChange = (tagId) => {
+    setSelectedTags((prev) =>
+      prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,6 +73,7 @@ export const AddPostAdmin = ({ postId, onSuccess, id }) => {
       setImageUrl("");
       setSelectedCategoryId("");
       setContent("");
+      setSelectedTags("");
       if (onSuccess) {
         onSuccess();
       }
@@ -125,21 +139,35 @@ export const AddPostAdmin = ({ postId, onSuccess, id }) => {
             </div>
           </div>
         </div>
-        <div className="field column is three-quarters is-flex is-justify-content-space-between">
-          <div className="control">
-            <label className="checkbox">
-              <input type="checkbox" />
-            </label>
-
-            <label className="checkbox">
-              <input type="checkbox" />
-            </label>
-
-            <label className="checkbox">
-              <input type="checkbox" />
-            </label>
+        <div className="field">
+          <label className="label">Tags</label>
+          <div className="tags">
+            {tags.map((tag) => (
+              <label key={tag.id} className="checkbox mr-3">
+                <input
+                  type="checkbox"
+                  checked={selectedTags.includes(tag.id)}
+                  onChange={() => handleCheckboxChange(tag.id)}
+                />
+                &nbsp;{tag.label}
+              </label>
+            ))}
           </div>
         </div>
+
+        {/* <div className="field column is-one-quarter is-flex is-justify-content-space-between">
+          <div className="control column is-one-quarter is-flex is-align-content-center">
+            {tags.map((tag) => (
+              <label className="checkbox mr-4" key={tag.id} value={tag.id}>
+                {tag.label}
+                <input
+                  type="checkbox"
+                  value={selectedTagId}
+                  onChange={(e) => setSelectedTagId(e.target.value)}></input>
+              </label>
+            ))}
+          </div>
+        </div> */}
         <div className="field is-grouped">
           <div className="control">
             <button type="submit" className="button is-link">

@@ -3,7 +3,7 @@ import { EditDeleteIconButtons } from "./EditDeleteIconButtons";
 // import { ReactionBar } from "./ReactionBar"; // 🔥 Ready for future use
 
 export const PostDetailLayout = ({ post, onEdit, onDelete, tags, onAuthorClick }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <section className="section">
       <div className="container">
@@ -56,10 +56,10 @@ export const PostDetailLayout = ({ post, onEdit, onDelete, tags, onAuthorClick }
                 </p>
               </div>
               <div>
-                <button 
+                <button
                   className="button is-light is-small"
                   onClick={() => navigate(`/comments/${post.id}`)}>
-                    View Comments
+                  View Comments
                 </button>
               </div>
               <div className="box has-background-light pt-2 pb-2">

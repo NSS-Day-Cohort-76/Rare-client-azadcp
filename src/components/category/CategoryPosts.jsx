@@ -1,36 +1,36 @@
-import { useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
-import { getCategoryById, getPostsByCategoryId } from "../../managers/CategoryManager"
-import { PostTable } from "../shared/PostTable"
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { getCategoryById, getPostsByCategoryId } from "../../managers/CategoryManager";
+import { PostTable } from "../shared/PostTable";
 
 export const CategoryPosts = () => {
-  const { categoryId } = useParams()
-  const [posts, setPosts] = useState([])
-  const [categoryLabel, setCategoryLabel] = useState("")
-  const navigate = useNavigate()
+  const { categoryId } = useParams();
+  const [posts, setPosts] = useState([]);
+  const [categoryLabel, setCategoryLabel] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCategoryById(categoryId)
       .then((category) => setCategoryLabel(category.label))
-      .catch((err) => console.error("Failed to load category", err))
+      .catch((err) => console.error("Failed to load category", err));
 
     getPostsByCategoryId(categoryId)
       .then(setPosts)
-      .catch((err) => console.error("Failed to load posts", err))
-  }, [categoryId])
+      .catch((err) => console.error("Failed to load posts", err));
+  }, [categoryId]);
 
   const handleRowClick = (postId) => {
-    navigate(`/posts/${postId}`)
-  }
+    navigate(`/posts/${postId}`);
+  };
 
   const handleEdit = (postId) => {
-    navigate(`/posts/${postId}/edit`)
-  }
+    navigate(`/posts/${postId}/edit`);
+  };
 
   const handleDelete = (postId) => {
-    console.log("Delete clicked for post ID:", postId)
+    console.log("Delete clicked for post ID:", postId);
     // You can add a modal here like in AllPostAdmin if needed
-  }
+  };
 
   return (
     <section className="section">
@@ -52,6 +52,5 @@ export const CategoryPosts = () => {
         />
       </div>
     </section>
-  )
-}
-
+  );
+};

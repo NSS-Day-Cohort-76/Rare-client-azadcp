@@ -16,9 +16,8 @@ import { AddPostAdmin } from "../components/posts/AddPostAdmin.jsx";
 import { PostDetailAdmin } from "../components/posts/PostDetailAdmin.jsx";
 import { CommentViewAdmin } from "../components/comments/CommentViewAdmin.jsx";
 import { CategoryPosts } from "../components/category/CategoryPosts.jsx";
-
+import { AllPostsAuthor } from "../components/posts/AllPostsAuthor.jsx";
 export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUserId }) => {
-  
   return (
     <>
       <Routes>
@@ -29,13 +28,14 @@ export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUse
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
           <Route path="/posts" element={<AllPostAdmin token={token} />} />
+          <Route path="/posts-author" element={<AllPostsAuthor token={token} />} />
           <Route path="/users" element={<UserListAdmin token={token} />} />
           {/* <Route path="/posts/:postId" element={<MyPostAdmin />} /> */}
           <Route path="/posts/:postId" element={<PostDetailAdmin />} />
           <Route path="/categories" element={<CategoryManager token={token} />} />
           <Route path="/categories/add" element={<CreateCategory token={token} />} />
-          <Route path="/categories/edit/:categoryId" element={<EditCategoryForm token={token}/>}/>
-          <Route path="/categories/:categoryId/posts" element={<CategoryPosts token={token}/>} />
+          <Route path="/categories/edit/:categoryId" element={<EditCategoryForm token={token} />} />
+          <Route path="/categories/:categoryId/posts" element={<CategoryPosts token={token} />} />
           <Route path="/tags" element={<TagManagerAdmin token={token} />} />
           <Route path="/posts/newpost" element={<AddPostAdmin token={token} />} />
           <Route
