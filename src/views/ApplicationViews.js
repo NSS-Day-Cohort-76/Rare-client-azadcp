@@ -15,9 +15,10 @@ import { EditCategoryForm } from "../components/category/EditCategory.jsx";
 import { AddPostAdmin } from "../components/posts/AddPostAdmin.jsx";
 import { PostDetailAdmin } from "../components/posts/PostDetailAdmin.jsx";
 import { CommentViewAdmin } from "../components/comments/CommentViewAdmin.jsx";
+import { CategoryPosts } from "../components/category/CategoryPosts.jsx";
 
 export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUserId }) => {
-  console.log("ApplicationViews currentUserId:", currentUserId);
+  
   return (
     <>
       <Routes>
@@ -33,7 +34,8 @@ export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUse
           <Route path="/posts/:postId" element={<PostDetailAdmin />} />
           <Route path="/categories" element={<CategoryManager token={token} />} />
           <Route path="/categories/add" element={<CreateCategory token={token} />} />
-          <Route path="/categories/edit/:categoryId" element={<EditCategoryForm token={token} />} />
+          <Route path="/categories/edit/:categoryId" element={<EditCategoryForm token={token}/>}/>
+          <Route path="/categories/:categoryId/posts" element={<CategoryPosts token={token}/>} />
           <Route path="/tags" element={<TagManagerAdmin token={token} />} />
           <Route path="/posts/newpost" element={<AddPostAdmin token={token} />} />
           <Route

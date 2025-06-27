@@ -44,3 +44,13 @@ export const getCategoryById = (id) => {
       return res.json()
     })
 }
+
+export const getPostsByCategoryId = (categoryId) => {
+  return fetch(`http://localhost:8000/posts?category_id=${categoryId}`)
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Failed to fetch posts")
+      }
+      return res.json()
+    })
+}

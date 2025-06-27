@@ -24,6 +24,7 @@ export const CategoryManager = () => {
       onAdd={() => navigate("/categories/new")}
       onDelete={handleDelete}
       onEdit={(id) => navigate(`/categories/edit/${id}`)}
+      onCategoryClick={(id) => navigate(`/categories/${id}/posts`)}
       // onSearch={}
     />
   );
