@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Home } from "../components/posts/Home";
 import { Login } from "../components/auth/Login";
 import { Register } from "../components/auth/Register";
 import { Authorized } from "./Authorized";
@@ -29,6 +30,7 @@ export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUse
         />
         <Route path="/register" element={<Register setToken={setToken} />} />
         <Route element={<Authorized token={token} />}>
+          <Route path="/home" element={<Home currentUserId={currentUserId} />} />
           <Route path="/posts" element={<AllPostAdmin token={token} />} />
           <Route path="/users" element={<UserListAdmin token={token} />} />
           {/* <Route path="/posts/:postId" element={<MyPostAdmin />} /> */}

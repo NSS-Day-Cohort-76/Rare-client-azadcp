@@ -15,17 +15,16 @@ export const PostDetailAdmin = () => {
     getSinglePost(postId).then(setPost);
   }, [postId]);
 
-  // 🔥 Navigation for edit
   const handleEdit = (id) => {
     navigate(`/posts/${id}/edit`);
   };
 
-  // 🔥 Trigger delete modal
+  // Trigger delete modal
   const handleDelete = () => {
+    console.log("delete icon triggers the modal");
     setShowModal(true);
   };
 
-  // 🔥 Confirm delete action
   const confirmDelete = () => {
     deletePost(post.id).then(() => {
       setShowModal(false);
@@ -33,12 +32,10 @@ export const PostDetailAdmin = () => {
     });
   };
 
-  // 🔥 Cancel delete
   const cancelDelete = () => {
     setShowModal(false);
   };
 
-  // 🔥 Navigate to author page
   const handleAuthorClick = () => {
     navigate(`/users/${post.user_id}`);
   };

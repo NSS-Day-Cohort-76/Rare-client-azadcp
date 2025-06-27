@@ -26,7 +26,7 @@ export const NavBar = ({ token, setToken, setCurrentUserId }) => {
   return (
     <nav className="navbar is-success mb-3" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link className="navbar-item" to="/">
+        <Link className="navbar-item" to="/home">
           <img src={Logo} height="3rem" alt="Rare Logo" />
           <h1 className="title is-4">Rare Publishing</h1>
         </Link>
