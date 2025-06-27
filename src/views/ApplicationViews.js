@@ -16,6 +16,7 @@ import { AddPostAdmin } from "../components/posts/AddPostAdmin.jsx";
 import { PostDetailAdmin } from "../components/posts/PostDetailAdmin.jsx";
 import { CommentViewAdmin } from "../components/comments/CommentViewAdmin.jsx";
 import { CategoryPosts } from "../components/category/CategoryPosts.jsx";
+import { EditPostAdmin } from "../components/posts/EditPostAdmin.jsx";
 
 export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUserId }) => {
   
@@ -44,6 +45,7 @@ export const ApplicationViews = ({ token, setToken, setCurrentUserId, currentUse
           />
           <Route path="/authorposts/:userId" element={<AuthorPosts />} />
           <Route path="/comments/:postId" element={<CommentViewAdmin token={token} />} />
+          <Route path="/posts/:postId/edit" element={<EditPostAdmin token={token} />} />
         </Route>
       </Routes>
     </>
