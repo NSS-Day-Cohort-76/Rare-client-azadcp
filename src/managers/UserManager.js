@@ -73,3 +73,7 @@ export const getSubscriberCount = async (authorId) => {
     return { count: 0 };
   }
 };
+
+export const getSubscribedPosts = (userId) =>
+  fetch(`http://localhost:8000/posts?subscribedTo=${userId}`)
+    .then(r => r.json());

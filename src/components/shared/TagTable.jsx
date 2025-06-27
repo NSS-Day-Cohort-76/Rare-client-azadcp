@@ -1,19 +1,17 @@
 import { EditDeleteIconButtons } from "../shared/EditDeleteIconButtons";
 
-export const TagTable = ({ tags, onEdit, onDelete }) => (
+export const TagTable = ({ tags, onEdit, onDelete, children}) => (
   <section className="section">
     <div className="container">
       <table className="table is-fullwidth is-striped is-hoverable">
         <thead>
           <tr>
-            <th></th> {/* Icon column */}
+            <th> {children} </th> {/* Icon column */}
             <th>Name</th>
           </tr>
         </thead>
-        <tbody>
-          {Array.isArray(tags) &&
-            tags.map((tag) => (
-              <tr key={tag.id}>
+        <tbody>{Array.isArray(tags) && tags.map(tag => (
+  <tr key={tag.id}>
                 <td>
                   <div className="is-flex">
                     <EditDeleteIconButtons
@@ -32,8 +30,7 @@ export const TagTable = ({ tags, onEdit, onDelete }) => (
                 </td>
                 <td>{tag.label}</td>
               </tr>
-            ))}
-        </tbody>
+))}</tbody>
       </table>
     </div>
   </section>
