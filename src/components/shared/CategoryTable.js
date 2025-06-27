@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { EditDeleteIconButtons } from "./EditDeleteIconButtons"
 
-export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd }) => {
+export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd, onCategoryClick }) => {
   // Sort categories alphabetically by name
   const sortedCategories = [...categories].sort((a, b) =>
     a.label.localeCompare(b.label)
@@ -61,7 +61,14 @@ export const CategoryTable = ({ categories, onEdit, onDelete, onSearch, onAdd })
                     />
                   </div>
                 </td>
-                <td>{category.label}</td>
+                <td>
+                  <span
+                    className="has-text-link is-clickable"
+                    onClick={() => onCategoryClick?.(category.id)}
+                  >
+                    {category.label}
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
