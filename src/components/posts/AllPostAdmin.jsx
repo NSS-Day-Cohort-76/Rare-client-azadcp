@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GetAllPosts, PostTag } from "../../managers/PostManager";
+import { GetAllPosts, PostTag, deletePost } from "../../managers/PostManager";
 import { PostTable } from "../shared/PostTable.jsx";
 import { ConfirmDeleteModal } from "../shared/ConfirmDeleteModal";
 import { SharedInput } from "../shared/SharedInput.jsx";
@@ -52,9 +52,19 @@ export const AllPostAdmin = () => {
   };
 
   const confirmDelete = () => {
-    console.log("🧨 Delete confirmed for post:", selectedPostId);
-    setShowModal(false);
-    // TODO: Add fetch DELETE logic here if needed
+    deletePost(selectedPostId)
+      .then(() => {
+        const updatedPosts = posts.filter((post) => post.id !== selectedPostId);
+        setPosts(updatedPosts);
+        setFilteredPosts(updatedPosts);
+
+        // Close the modal and clear selection
+        setShowModal(false);
+        setSelectedPostId(null);
+      })
+      .catch((error) => {
+        console.error("Delete error:", error);
+      });
   };
 
   const cancelDelete = () => {
